@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Movies</h1>
+<%= link_to 'Prijava',new_user_session_url if !user_signed_in? %>
+<%= button_to 'Odjava',destroy_user_session_path, method: :delete if user_signed_in? %>
 
 <table>
   <thead>
