@@ -1,5 +1,6 @@
-<p>Welcome <%= @email %>!</p>
+<p>Welcome to MovieShow!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>We are glad to see you aborad!<br>
+  You need to confirm your account to start using our application trough the link bellow:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
