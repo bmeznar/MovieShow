@@ -3095,10 +3095,10 @@
   "resolved" "https://registry.npmjs.org/node-releases/-/node-releases-1.1.71.tgz"
   "version" "1.1.71"
 
-"node@^15.10.0":
-  "integrity" "sha512-JboERsul33BpTDeth8SsGWg/gTZfNEWGMT5HVqIoyepRwAARznCjwdWvLHHd/A9bvAYFp5zaq46RnVArWz44kA=="
-  "resolved" "https://registry.npmjs.org/node/-/node-15.10.0.tgz"
-  "version" "15.10.0"
+"node@^15.12.0":
+  "integrity" "sha512-0R4LdnFQzII7I04A2eY1d4TypvH6XhSMluRr477Zwz43jUWdM+bayWsLfgnkf1Cv4Tbl9MaTAjAIvGpC0+6gFQ=="
+  "resolved" "https://registry.npmjs.org/node/-/node-15.12.0.tgz"
+  "version" "15.12.0"
   dependencies:
     "node-bin-setup" "^1.0.0"
 
