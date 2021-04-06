@@ -16,6 +16,9 @@
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
   },
+  "scripts":{
+    "build": "node node_modules/webpack/bin/webpack.js --display-error-details"
+  },
   "babel": {
     "presets": [
       "./node_modules/@rails/webpacker/package/babel/preset.js"
