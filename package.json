@@ -18,7 +18,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "start": "node app/javascript/packs/appication.js",
     "build": "node node_modules/webpack/bin/webpack.js"
   },
   "babel": {
