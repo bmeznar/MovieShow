@@ -18,7 +18,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "start":"node index.js",
+    "start": "node-sass sass/main.scss  css/style.css -w",
     "build": "node node_modules/webpack/bin/webpack.js"
   },
   "babel": {
