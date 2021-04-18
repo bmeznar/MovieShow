@@ -61,6 +61,17 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "MovieShow_production"
+  config.action_mailer.default_url_options = {:host => 'movieshow-spletniki.herokuapp.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :domain => 'movieshow-spletniki.herokuapp.com/',
+    :username => "apikey",
+    :password => ENV['SENDGRID_API_KEY'],
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 
   config.action_mailer.perform_caching = false
 
