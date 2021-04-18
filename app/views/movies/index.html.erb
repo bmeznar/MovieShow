@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Movies</h1>
-<%= link_to 'Prijava',new_user_session_url if !user_signed_in? %>
+<%= link_to 'Prijava',new_user_session_path if !user_signed_in? %>
 <%= link_to 'Odjava',destroy_user_session_path, method: :delete if user_signed_in? %>
 
 <table>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Movie', new_movie_path %>
+<%= link_to 'New Movie', '/movie/new' %>

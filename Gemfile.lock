@@ -8,6 +8,12 @@ GIT
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
 
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: ca8a36769e0db392e0ddb8d27e492d15052046b0
+  specs:
+    stripe (5.32.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -99,6 +105,9 @@ GEM
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    haml (5.2.1)
+      temple (>= 0.8.0)
+      tilt
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -193,6 +202,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -226,6 +236,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  haml
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg
@@ -235,6 +246,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   spring
+  stripe!
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

@@ -25,6 +25,10 @@ gem 'jbuilder', '~> 2.7'
 #devise
 gem 'devise'
 
+#ssubscription payment
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'haml'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
