@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :movies
+
+      root to: "users#index"
+    end
   resources :subscribers
   devise_for :users, :controllers => { :registrations => "registrations" }
   devise_scope :user do

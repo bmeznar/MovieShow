@@ -29,6 +29,9 @@ gem 'devise'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'haml'
 
+
+gem "administrate"
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
