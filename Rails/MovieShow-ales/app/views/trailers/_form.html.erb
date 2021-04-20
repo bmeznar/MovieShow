@@ -1,0 +1,23 @@
+<%= form_with(model: trailer) do |form| %>
+  <% if trailer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trailer.errors.count, "error") %> prohibited this trailer from being saved:</h2>
+
+      <ul>
+        <% trailer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :videoID %>
+    <%= form.text_field :videoID %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

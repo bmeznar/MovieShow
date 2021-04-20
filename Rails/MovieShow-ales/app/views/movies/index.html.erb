@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Prijava',new_user_session_url if !user_signed_in? %>
+<%= link_to 'Odjava',destroy_user_session_path, method: :delete if user_signed_in? %>
+
+<h2>
+Your watch list
+</h2>
+
+<div class="watchlist">
+<%= if user_signed_in? 
+    current_user.watchlists.each do |wachlist|
+      link_to wachlist.movie.title,wachlist.movie
+    end
+end%>
+
+<%= if !user_signed_in? 
+    link_to 'Create an account to get a watchlist', new_user_registration_url  
+end%>
+</div>
+
+<h1 >
+Upcoming movies
+</h1>
+<div class="trailer">
+     <% @trailers.each do |trailer| %>
+      <tr>
+
+          <iframe src='https://www.youtube.com/embed/<%= trailer.videoId %>?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreen  class="tra"></iframe>
+      </tr>
+    <% end %>
+</div>
+<h1 class="top">
+Top Movies
+</h1>
+<br>
+<div class="filmi">
+<% @movies.each do |movie| %>
+  <div class="film">
+      <div class="slika"><%= link_to (image_tag 'https://image.tmdb.org/t/p/w300/' + movie.poster_path), movie_path(movie.id) %></div>
+      <div class="naslov"><%= movie.title %> </div>
+      <div class="datum"><%= movie.release_date %></div>
+  </div>
+<% end %>
+</div>
