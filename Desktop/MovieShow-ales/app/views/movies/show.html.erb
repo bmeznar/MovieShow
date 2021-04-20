@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Back', movies_path %>
+<%= link_to watchlist_text, watchlists_update_path(movie: @movie), id:'wachlist_link', remote: true %>
+<%= image_tag 'https://image.tmdb.org/t/p/w300/' + @movie.poster_path %>
+<%= image_tag 'https://image.tmdb.org/t/p/w1280/' + @movie.backdrop_path %>
+<h2><%= @movie.title %></h2>
+<%= @movie.average_vote %>
+<%= @movie.overview %>
+Release Date: <%= (@movie.release_date).to_time.strftime(' %b %d %Y') %>
+Duration: <%= @movie.runtime %>m
+
+
