@@ -9,7 +9,7 @@ class MovieDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    created_at: Field::DateTime,
+    title: Field::String,
     updated_at: Field::DateTime,
   }.freeze
 
@@ -20,7 +20,7 @@ class MovieDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    created_at
+    title
     updated_at
   ].freeze
 
@@ -28,7 +28,7 @@ class MovieDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    created_at
+    tilte
     updated_at
   ].freeze
 
