@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "MovieShow_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { :host   => 'movieshow-spletniki.heroku.com'}
+  config.action_mailer.default_url_options = { :host   => 'https://movieshow-spletniki.heroku.com'}
   ActionMailer::Base.smtp_settings = {
     :port           => ENV['MAILGUN_SMTP_PORT'],
     :address        => ENV['MAILGUN_SMTP_SERVER'],

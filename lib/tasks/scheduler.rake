@@ -1,4 +1,4 @@
-task :update => :environment do
+task :update_movie => :environment do
     movie_seed = JSON.parse(RestClient.get("https://api.themoviedb.org/3/movie/popular?api_key=#{ENV["MOVIE_API_KEY"]}&page=2"))
     movie_seed['results'].each do |movie|
     Movie.where(
