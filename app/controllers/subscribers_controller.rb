@@ -15,7 +15,7 @@ class SubscribersController < ApplicationController
     current_user.subscribed=true;
     current_user.stripeid=customer.id
     current_user.save
-    redirect_to movies_path
+    redirect_to 'movies#index'
   end
 
 end
