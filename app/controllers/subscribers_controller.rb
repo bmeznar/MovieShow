@@ -3,7 +3,6 @@ class SubscribersController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    redirect_to 'subscribers#update'
   end
 
   def update
