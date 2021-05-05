@@ -8,7 +8,7 @@ class SubscribersController < ApplicationController
   def new
   end
 
-  def create
+  def test
     customer = if current_user.stripeid?
                  Stripe::Customer.retrieve(current_user.stripeid)
                else
