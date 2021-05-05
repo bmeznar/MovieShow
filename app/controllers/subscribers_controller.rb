@@ -12,7 +12,7 @@ class SubscribersController < ApplicationController
   end
 
   def create
-    Stripe.api_key = Rails.configuration.stripe[:publishable_key]
+    Stripe.api_key = ENV["STRIPE_PUBLISHABLE_KEY"]
 
     plan_id = params[:plan_id]
     plan = Stripe::Plan.retrieve(plan_id)
