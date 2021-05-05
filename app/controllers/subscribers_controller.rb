@@ -3,9 +3,12 @@ class SubscribersController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    if user_signed_in? && current_user.subscribed?
+      redirect_to root_path, notice: "You are already a subscriber"
+    end
   end
 
-  def update
+  def create
     token=params[:stripeToken]
     customer=Stripe::Customer.create(
       card: token,
@@ -15,7 +18,6 @@ class SubscribersController < ApplicationController
     current_user.subscribed=true;
     current_user.stripeid=customer.id
     current_user.save
-    redirect_to 'movies#index'
+    redirect_to movies_path
   end
-
 end
