@@ -8,35 +8,6 @@ class SubscribersController < ApplicationController
   def new
     if user_signed_in? && current_user.subscribed?
       redirect_to root_path, notice: "You are already a subscriber"
-    else
-      Stripe.api_key = ENV["STRIPE_PUBLISHABLE_KEY"]
-
-      plan_id = 'prod_JIKWwiwuJFfiJj'
-      token = params[:stripeToken]
-
-      customer = if current_user.stripe_id?
-                  Stripe::Customer.retrieve(current_user.stripe_id)
-                 else
-                  Stripe::Customer.create(email: current_user.email, source: token)
-                end
-
-      subscription = customer.subscriptions.create(plan: plan.id)
-
-      options = {
-        stripeid: customer.id,
-        subscribed: true
-      }
-
-      options.merge!(
-        card_last4: params[:user][:card_last4],
-        card_exp_month: params[:user][:card_exp_month],
-        card_exp_year: params[:user][:card_exp_year],
-        card_type: params[:user][:card_type]
-      ) if params[:user][:card_last4]
-
-      current_user.update(options)
-
-      redirect_to root_path, notice: "Your subscription was setup successfully!"
     end
   end
 
