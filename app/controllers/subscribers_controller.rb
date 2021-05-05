@@ -6,36 +6,41 @@ class SubscribersController < ApplicationController
   end
 
   def new
+    if user_signed_in? && current_user.subscribed?
+      redirect_to root_path, notice: "You are already a subscriber"
+    end
   end
 
-  def test
-    customer = if current_user.stripeid?
-                 Stripe::Customer.retrieve(current_user.stripeid)
-               else
-                 Stripe::Customer.create(email: current_user.email)
-               end
+  def create
+    Stripe.api_key = Rails.configuration.stripe[:publishable_key]
 
-    subscription = customer.subscriptions.create(
-      source: params[:stripeToken],
-      plan: "Monthly"
-    )
+    plan_id = params[:plan_id]
+    plan = Stripe::Plan.retrieve(plan_id)
+    token = params[:stripeToken]
+
+    customer = if current_user.stripe_id?
+                Stripe::Customer.retrieve(current_user.stripe_id)
+               else
+                Stripe::Customer.create(email: current_user.email, source: token)
+              end
+
+    subscription = customer.subscriptions.create(plan: plan.id)
 
     options = {
-      stripeid: subscription.id,
-      subscription: true,
+      stripeid: customer.id,
+      subscribed: true
     }
 
-    # Only update the card on file if we're adding a new one
     options.merge!(
-      card_last4: params[:card_last4],
-      card_exp_month: params[:card_exp_month],
-      card_exp_year: params[:card_exp_year],
-      card_type: params[:card_brand]
-    ) if params[:card_last4]
+      card_last4: params[:user][:card_last4],
+      card_exp_month: params[:user][:card_exp_month],
+      card_exp_year: params[:user][:card_exp_year],
+      card_type: params[:user][:card_type]
+    ) if params[:user][:card_last4]
 
     current_user.update(options)
 
-    redirect_to root_path
+    redirect_to root_path, notice: "Your subscription was setup successfully!"
   end
 
   def destroy
