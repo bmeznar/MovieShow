@@ -2,70 +2,57 @@ class SubscribersController < ApplicationController
 
   before_action :authenticate_user!
 
+  def show
+  end
+
   def new
-    if user_signed_in? && current_user.subscribed?
-      redirect_to root_path, notice: "You are already a subscriber"
-    end
   end
 
   def create
-    token=params[:stripeToken]
-    customer=Stripe::Customer.create(
-      card: token,
-      plan: 'prod_JIKWwiwuJFfiJj',
-      email: current_user.email
+    customer = if current_user.stripeid?
+                 Stripe::Customer.retrieve(current_user.stripeid)
+               else
+                 Stripe::Customer.create(email: current_user.email)
+               end
+
+    subscription = customer.subscriptions.create(
+      source: params[:stripeToken],
+      plan: "Monthly"
     )
-    current_user.subscribed=true;
-    current_user.stripeid=customer.id
-    current_user.save
-    redirect_to movies_path
+
+    options = {
+      stripeid: subscription.id,
+      subscription: true,
+    }
+
+    # Only update the card on file if we're adding a new one
+    options.merge!(
+      card_last4: params[:card_last4],
+      card_exp_month: params[:card_exp_month],
+      card_exp_year: params[:card_exp_year],
+      card_type: params[:card_brand]
+    ) if params[:card_last4]
+
+    current_user.update(options)
+
+    redirect_to root_path
   end
 
-  #def new
-  #  if user_signed_in? && current_user.subscribed?
-  #    redirect_to root_path, notice: "You are already a subscriber"
-  #  end
-  #end
+  def destroy
+    customer = Stripe::Customer.retrieve(current_user.stripe_id)
+    customer.subscriptions.retrieve(current_user.stripe_subscription_id).delete
+    current_user.update(stripeid: nil, subscribed: nil)
 
-  #def create
-  #  Stripe.api_key = Rails.application.credentials.stripe_api_key
-  #  token=params[:stripeToken]
+    redirect_to root_path, notice: "Your subscription has been canceled."
+  end
 
-  #  plan_id = 'prod_JIKWwiwuJFfiJj'
-  #  token = token
+  private
 
-  #  customer = if current_user.stripe_id?
-  #              Stripe::Customer.retrieve(current_user.stripeid)
-  #             else
-  #              Stripe::Customer.create(email: current_user.email, source: token)
-  #            end
-
-  #  subscription = customer.subscriptions.create(plan: plan.id)
-
-  #  options = {
-  #    stripeid: subscription.id,
-  #    subscribed: true
-  #  }
-
-  #  options.merge!(
-  #    card_last4: params[:user][:card_last4],
-  #    card_exp_month: params[:user][:card_exp_month],
-  #    card_exp_year: params[:user][:card_exp_year],
-  #    card_type: params[:user][:card_type]
-  #  ) if params[:user][:card_last4]
-
-  #  current_user.update(options)
-
-  #  redirect_to root_path, notice: "Your subscription was setup successfully!"
-  #end
-
-  #def destroy
-  #  customer = Stripe::Customer.retrieve(current_user.stripe_id)
-  #  customer.subscriptions.retrieve(current_user.stripe_subscription_id).delete
-  #  current_user.update(stripe_subscription_id: nil)
-  #  current_user.subscribed = false
-
-  #  redirect_to root_path, notice: "Your subscription has been cancelled."
-  #end
+    def redirect_to_signup
+      if !user_signed_in?
+        session["user_return_to"] = new_subscription_path
+        redirect_to new_user_registration_path
+      end
+    end
 
 end
