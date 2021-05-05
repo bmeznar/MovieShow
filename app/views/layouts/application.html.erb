@@ -13,11 +13,6 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <% if current_user.subscribed!=true %>
-      <% redirect_to new_subscriber %>
-      <%end%>
-    <%end%>
     <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
