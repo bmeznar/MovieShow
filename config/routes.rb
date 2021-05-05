@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       root to: "users#index"
     end
   resources :subscribers
+  get 'test' => "subscribers_controller#test"
   devise_for :users, :controllers => { :registrations => "registrations" }
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
