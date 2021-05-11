@@ -1,3 +1,8 @@
+<% if user_signed_in? %>
+      <% if current_user.subscribed!=true %>
+            <% redirect_to 'subscribers/new' %>
+      <% end %>
+<% end %>
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'Prijava',new_user_session_path if !user_signed_in? %>
