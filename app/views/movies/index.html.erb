@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<% if current_user.subscribed==true %>
+      <% redirect_to 'subscribers/new' %>
+<% end %>
 
 <%= link_to 'Prijava',new_user_session_path if !user_signed_in? %>
 <%= link_to 'Odjava',destroy_user_session_path, method: :delete if user_signed_in? %>
