@@ -15,28 +15,27 @@ class SubscribersController < ApplicationController
     Stripe.api_key = ENV["STRIPE_PUBLISHABLE_KEY"]
 
     plan_id = 'prod_JIKWwiwuJFfiJj'
-    #token = params[:stripeToken]
+    token = params[:stripeToken]
 
-    #customer = if current_user.stripe_id?
-    #            Stripe::Customer.retrieve(current_user.stripe_id)
-    #           else
-    #            Stripe::Customer.create(email: current_user.email, source: token)
-    #          end
+    customer = if current_user.stripe_id?
+                Stripe::Customer.retrieve(current_user.stripe_id)
+               else
+                Stripe::Customer.create(email: current_user.email, source: token)
+              end
 
-    #subscription = customer.subscriptions.create(plan: plan.id)
+    subscription = customer.subscriptions.create(plan: plan.id)
 
     options = {
-      #stripeid: customer.id,
-      stripeid: 'test',
+      stripeid: customer.id,
       subscribed: true
     }
 
-    #options.merge!(
-    #  card_last4: params[:user][:card_last4],
-    #  card_exp_month: params[:user][:card_exp_month],
-    #  card_exp_year: params[:user][:card_exp_year],
-    #  card_type: params[:user][:card_type]
-    #) if params[:user][:card_last4]
+    options.merge!(
+      card_last4: params[:user][:card_last4],
+      card_exp_month: params[:user][:card_exp_month],
+      card_exp_year: params[:user][:card_exp_year],
+      card_type: params[:user][:card_type]
+    ) if params[:user][:card_last4]
 
     current_user.update(options)
 
