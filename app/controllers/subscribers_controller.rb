@@ -24,7 +24,7 @@ class SubscribersController < ApplicationController
                 Stripe::Customer.create(email: current_user.email, source: token)
               end
 
-    subscription = customer.subscriptions.create(plan: plan.id)
+    #subscription = customer.subscriptions.create(plan: plan.id)
 
     options = {
       stripeid: customer.id,
