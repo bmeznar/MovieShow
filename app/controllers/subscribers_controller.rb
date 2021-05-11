@@ -1,7 +1,8 @@
 class SubscribersController < ApplicationController
 
   before_action :authenticate_user!
-
+  require "stripe"
+  
   def show
   end
 
