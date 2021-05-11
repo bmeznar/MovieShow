@@ -11,7 +11,7 @@ class SubscribersController < ApplicationController
     end
   end
 
-  def create
+  def update
     Stripe.api_key = ENV["STRIPE_PUBLISHABLE_KEY"]
 
     plan_id = 'prod_JIKWwiwuJFfiJj'
