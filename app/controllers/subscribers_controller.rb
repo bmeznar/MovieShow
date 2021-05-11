@@ -12,7 +12,7 @@ class SubscribersController < ApplicationController
   end
 
   def update
-    Stripe.api_key = ENV["STRIPE_PUBLISHABLE_KEY"]
+    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
 
     plan_id = 'prod_JIKWwiwuJFfiJj'
     token = params[:stripeToken]
