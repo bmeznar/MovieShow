@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :create_trailers
   resources :movies
   resources :subscribers
+  get '/subscribers/:id', to: 'subscribers#update', as: 'subscriber_update'
   devise_for :users, :controllers => { :registrations => "registrations" }
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
