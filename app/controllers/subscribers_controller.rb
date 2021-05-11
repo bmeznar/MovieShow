@@ -6,6 +6,9 @@ class SubscribersController < ApplicationController
   end
 
   def new
+    if user_signed_in? && current_user.subscribed?
+      redirect_to root_path, notice: "You are already a subscriber!"
+    end
   end
 
   def update
