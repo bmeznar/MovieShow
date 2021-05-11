@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       root to: "users#index"
     end
   get 'watchlists/update'
-  post 'subscriber_update' => 'subscribers#create'
+  put 'subscribers#update', as: :subscribers_update
   resources :trailers
   resources :create_trailers
   resources :movies
