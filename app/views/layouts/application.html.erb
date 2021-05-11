@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% if user_signed_in? %>
-          <% if current_user.subscribed!=true %>
-                <% redirect_to 'subscribers/new' %>
-          <% end %>
-    <% end %>
     <title>MovieShow</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
