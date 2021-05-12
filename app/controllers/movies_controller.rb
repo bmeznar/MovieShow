@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/1 or /movies/1.json
   def show
-    if user_sined_in?
+    if user_signed_in?
       if !current_user.subscribed
         redirect_to new_subscriber_path
       end
