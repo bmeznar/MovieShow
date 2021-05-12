@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
   # GET /movies or /movies.json
   def index
-    if user_sined_in?
+    if user_signed_in?
       if !current_user.subscribed
         redirect_to new_subscriber_path
       end
