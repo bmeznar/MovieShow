@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+    
+    before_action :check_user
+    
     def watchlist_text
         return @watchlist_exists ? "Remove from Watchlist" : "Add to Watchlist"
     end
@@ -11,6 +14,5 @@ class ApplicationController < ActionController::Base
         end
     end
     
-    before_action :check_user
     helper_method :watchlist_text
 end
