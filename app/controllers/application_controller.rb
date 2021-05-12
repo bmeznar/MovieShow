@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
           end
         end
     end
-
+    
+    before_action :check_user
     helper_method :watchlist_text
 end
