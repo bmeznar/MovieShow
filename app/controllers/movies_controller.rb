@@ -2,22 +2,14 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
   # GET /movies or /movies.json
   def index
-    if user_signed_in?
-      if !current_user.subscribed
-        redirect_to new_subscriber_path
-      end
-    end
+    check_user
     @trailers = Trailer.all
     @movies = Movie.all
   end
 
   # GET /movies/1 or /movies/1.json
   def show
-    if user_signed_in?
-      if !current_user.subscribed
-        redirect_to new_subscriber_path
-      end
-    end
+    check_user
     @watchlist_exists = Watchlist.where(movie: @movie, user: current_user) == [] ? false : true
   end
 
