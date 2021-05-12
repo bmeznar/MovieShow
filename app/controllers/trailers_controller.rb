@@ -8,6 +8,11 @@ class TrailersController < ApplicationController
 
   # GET /trailers/1 or /trailers/1.json
   def show
+    if user_signed_in?
+      if !current_user.subscribed
+        redirect_to new_subscriber_path
+      end
+    end
   end
 
   # GET /trailers/new
