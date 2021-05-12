@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
       <% if !current_user.subscribed %>
-            <%= current_user.subscribed %>
+            <% redirect_to new_subscriber_path %>
       <% end %>
 <% end %>
 <p id="notice"><%= notice %></p>
